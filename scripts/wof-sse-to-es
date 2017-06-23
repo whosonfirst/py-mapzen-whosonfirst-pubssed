@@ -32,7 +32,13 @@ if __name__ == "__main__":
 
     client = sseclient.SSEClient(rsp)
 
+    """
+    ./scripts/wof-sse-to-es --sse-endpoint http://10.0.77.163:8080/sse
+    Message: data/303/109/123/303109123.geojson
+    Message: data/638/608/585/638608585.geojson
+    """
+
     for ev in client.events():
-        pprint.pprint(json.loads(ev.data))
+        print ev.data
 
     sys.exit(0)
