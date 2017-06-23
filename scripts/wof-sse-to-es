@@ -1,0 +1,36 @@
+#!/usr/bin/env python
+
+import sseclient
+import requests
+import json
+import logging
+
+if __name__ == "__main__":
+
+    import optparse
+    opt_parser = optparse.OptionParser()
+
+    opt_parser.add_option('--sse-endpoint', dest='sse_endpoint', action='store', default='localhost', help='')
+
+    opt_parser.add_option('--es-index', dest='es_index', action='store', default='whosonfirst', help='Where to write the records to (default is whosonfirst)')
+    opt_parser.add_option('--es-host', dest='es_host', action='store', default='localhost', help='What host your search index lives (default is localhost)')
+    opt_parser.add_option('--es-port', dest='es_port', action='store', default=9200, help='What port your search index lives on (default is 9200)')
+
+    opt_parser.add_option('-v', '--verbose', dest='verbose', action='store_true', default=False, help='Be chatty (default is false)')
+
+    options, args = opt_parser.parse_args()
+
+    if options.verbose:
+        logging.basicConfig(level=logging.DEBUG)
+    else:
+        logging.basicConfig(level=logging.WARNING)
+
+    url = options.sse_endpoint
+    rsp = requests.get(url, stream=True)
+
+    client = sseclient.SSEClient(response)
+
+    for ev in client.events():
+        pprint.pprint(json.loads(ev.data))
+
+    sys.exit(0)
