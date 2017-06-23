@@ -19,7 +19,7 @@ desc = open("README.md").read()
 
 setup(
     name='mapzen.whosonfirst.pubssed',
-    namespace_packages=['mapzen', 'mapzen.whosonfirst'],
+    # namespace_packages=['mapzen', 'mapzen.whosonfirst'],
     version=version,
     description='Shared utilities for working with Who\'s On First pubssed streams',
     author='Mapzen',

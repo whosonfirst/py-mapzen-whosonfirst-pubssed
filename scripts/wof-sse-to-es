@@ -2,8 +2,10 @@
 
 import sseclient
 import requests
-import json
 import logging
+
+import pprint
+import json
 
 if __name__ == "__main__":
 
@@ -28,7 +30,7 @@ if __name__ == "__main__":
     url = options.sse_endpoint
     rsp = requests.get(url, stream=True)
 
-    client = sseclient.SSEClient(response)
+    client = sseclient.SSEClient(rsp)
 
     for ev in client.events():
         pprint.pprint(json.loads(ev.data))
